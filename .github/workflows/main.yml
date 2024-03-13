@@ -1,4 +1,7 @@
 name: Minify Plugin
+permissions:
+  contents: read
+  pages: write 
 on:
   push:
     branches:
