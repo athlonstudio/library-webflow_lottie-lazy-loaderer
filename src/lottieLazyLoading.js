@@ -1,5 +1,4 @@
 const lazyLotties = [...document.querySelectorAll('[data-loading="lazy"]')];
-const isDisplayNone = (el) => getComputedStyle(el).display === 'none';
 
 if (!!lazyLotties.length){
   lazyLotties.forEach((lazyLottie) => {
@@ -20,7 +19,7 @@ if (!!lazyLotties.length){
       const lottieEl = entry.target;
       const isLoaded = lottieEl.children.length && (lottieEl.children[0].tagName === 'SVG' || lottieEl.children[0].tagName === 'CANVAS');
 
-      if (entry.isIntersecting && !isDisplayNone(lottieEl)) {
+      if (entry.isIntersecting && lottieEl.checkVisibility({contentVisibilityAuto: true, opacityProperty: true, visibilityProperty: true})) {
         lottieEl.dataset.state = 'playing';
         
         if (!isLoaded) {
