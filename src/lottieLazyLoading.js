@@ -19,8 +19,8 @@ if (!!lazyLotties.length) {
     const lazyLottieObserver = new IntersectionObserver((entries) => entries.forEach(async (entry) => {
       const lottieEl = entry.target;
       const isLoaded = lottieEl.children.length && (lottieEl.children[0].tagName === 'SVG' || lottieEl.children[0].tagName === 'CANVAS');
-      console.log(lottieEl);
-      if (entry.isIntersecting && lottieEl && lottieEl.checkVisibility()) {
+
+      if (entry.isIntersecting && lottieEl && lottieEl.style.display !== 'none') {
         lottieEl.dataset.state = 'playing';
         if (!isLoaded) {
           lottieEl.dataset.animationType = 'lottie';
