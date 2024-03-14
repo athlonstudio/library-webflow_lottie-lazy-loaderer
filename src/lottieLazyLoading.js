@@ -7,7 +7,7 @@ if (!!lazyLotties.length) {
     lazyLottie.dataset.animationType = 'lazy-lottie';
     lazyLottie.style.overflow = 'hidden';
     if(lazyLottie.dataset.poster) {
-      lazyLottie.style.position !== 'absolute' && lazyLottie.style.position = 'relative';
+      lazyLottie.style.position !== 'absolute' && (lazyLottie.style.position = 'relative');
       lazyLottie.appendChild(Object.assign(document.createElement('img'),{
             src:lazyLottie.dataset.poster, 
             loading: 'eager',
