@@ -19,7 +19,7 @@ if (!!lazyLotties.length){
       const lottieEl = entry.target;
       const isLoaded = lottieEl.children.length && (lottieEl.children[0].tagName === 'SVG' || lottieEl.children[0].tagName === 'CANVAS');
 
-      if (entry.isIntersecting && lottieEl.checkVisibility({contentVisibilityAuto: true, opacityProperty: true, visibilityProperty: true})) {
+      if (entry.isIntersecting && lottieEl.checkVisibility()) {
         lottieEl.dataset.state = 'playing';
         
         if (!isLoaded) {
@@ -44,6 +44,6 @@ if (!!lazyLotties.length){
           lottieEl.dataset.loop = 0;
           Webflow.require('lottie').createInstance(lottieEl);
       }
-    }), { rootMargin: `${window.innerHeight/100}px` });
+    }), { root: document.body, rootMargin: `${window.innerHeight/100}px` });
     lazyLotties.forEach((lottieElement) => lazyLottieObserver.observe(lottieElement));
 }
