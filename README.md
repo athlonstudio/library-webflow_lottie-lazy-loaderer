@@ -5,7 +5,7 @@ A js package that when put into a webflow website will enable lazy loading of Lo
 Paste the script into the **Footer code** of your Webflow page and apply a `data-loading: lazy` attribute to all the lottie elements you want lazy loaded.
 
 ```html
-<script src='https://cdn.jsdelivr.net/gh/athlonstudio/webflow-lottie-lazy-loader@main/src/lottieLazyLoading.min.js'></script>
+<script src='https://cdn.jsdelivr.net/gh/athlonstudio/webflow-lottie-lazy-loader@V1.1.0/src/lottieLazyLoading.min.js'></script>
 ```
 
 ## Attributes
