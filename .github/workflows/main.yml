@@ -23,3 +23,11 @@ jobs:
         repo-token: ${{ secrets.GITHUB_TOKEN }}
         commit_message: "Github Action: Auto Minified JS and CSS files"
         branch: ${{ github.ref }}
+    - name: Purge JSdeliver
+      uses: gacts/purge-jsdelivr-cache@v1
+      with: 
+        url: |
+          https://cdn.jsdelivr.net/gh/athlonstudio/webflow-lottie-lazy-loader@latest/src/lottieLazyLoading.js
+          https://cdn.jsdelivr.net/gh/athlonstudio/webflow-lottie-lazy-loader@latest/src/lottieLazyLoading.min.js
+          https://cdn.jsdelivr.net/gh/athlonstudio/webflow-lottie-lazy-loader@${{ github.ref_name }}/src/lottieLazyLoading.min.js
+
