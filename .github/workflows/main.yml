@@ -22,9 +22,9 @@ jobs:
     
   purge:
     runs-on: ubuntu-latest
-    if: always()
     steps:
     - name: Purge JSdeliver
+      continue-on-error: true
       uses: gacts/purge-jsdelivr-cache@v1
       with: 
         url: |
