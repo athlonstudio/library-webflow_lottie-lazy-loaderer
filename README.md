@@ -10,6 +10,7 @@ Paste the script into the **Footer code** of your Webflow page and apply a `data
 
 ## Attributes
 - `data-loading: lazy` - Enables lazy loading on that Lottie element.
+- `data-play-once: true` - Makes it so that the Lottie element only plays one time and remains static after that first play.
 - `data-poster: [image-URL]` - Generates a placeholder image that loads with the page, and persists until you scroll and the Lottie element lazy loads in. This attribute may affect performance if you use large or there are too many lotties on your page. Small SVGs or WEBP reccomended.
 
 ## Example 
