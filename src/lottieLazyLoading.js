@@ -6,6 +6,7 @@ if (!!lazyLotties.length) {
     lazyLottie.dataset.src = '';
     lazyLottie.dataset.animationType = 'lazy-lottie';
     lazyLottie.style.overflow = 'hidden';
+    
     if(lazyLottie.dataset.poster) {
       lazyLottie.style.position !== 'absolute' && (lazyLottie.style.position = 'relative');
       lazyLottie.appendChild(Object.assign(document.createElement('img'),{
@@ -19,16 +20,18 @@ if (!!lazyLotties.length) {
     const lazyLottieObserver = new IntersectionObserver((entries) => entries.forEach(async (entry) => {
       const lottieEl = entry.target;
       const isLoaded = lottieEl.children.length && (lottieEl.children[0].tagName === 'SVG' || lottieEl.children[0].tagName === 'CANVAS');
-
+      
       if (entry.isIntersecting && lottieEl && lottieEl.style.display !== 'none') {
         lottieEl.dataset.state = 'playing';
+        
         if (!isLoaded) {
           lottieEl.dataset.animationType = 'lottie';
           lottieEl.dataset.src = lottieEl.dataset.defaultSrc; 
           await Webflow.require('lottie').createInstance(lottieEl);
           lottieEl.querySelector('img') && lottieEl.querySelector('img').remove();
+          
           if (!parseFloat(lottieEl.dataset.loop)) {
-            lazyLottieObserver.unobserve(lottieEl);
+            //lazyLottieObserver.unobserve(lottieEl);
           } 
         }	else {
           lottieEl.dataset.duration = 0;
@@ -41,7 +44,7 @@ if (!!lazyLotties.length) {
           lottieEl.dataset.loop = 0;
           Webflow.require('lottie').createInstance(lottieEl);
       }
-    }), { root: document.body, rootMargin: `${window.innerHeight/100}px` });
+    }), { root: null, rootMargin: `${window.innerHeight/4}px` });
   
     lazyLotties.forEach((lottieElement) => lazyLottieObserver.observe(lottieElement));
 }
