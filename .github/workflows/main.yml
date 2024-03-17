@@ -20,7 +20,6 @@ jobs:
     - name: Auto committing minified files
       uses: stefanzweifel/git-auto-commit-action@v4
       with:
-        repo-token: ${{ secrets.GITHUB_TOKEN }}
         commit_message: "Github Action: Auto Minified JS and CSS files"
         branch: ${{ github.ref }}
     - name: Purge JSdeliver
