@@ -30,8 +30,8 @@ if (!!lazyLotties.length) {
           await Webflow.require('lottie').createInstance(lottieEl);
           lottieEl.querySelector('img') && lottieEl.querySelector('img').remove();
           
-          if (!parseFloat(lottieEl.dataset.loop)) {
-            //lazyLottieObserver.unobserve(lottieEl);
+          if (lottieEl.dataset.playOnce === 'true') {
+            lazyLottieObserver.unobserve(lottieEl);
           } 
         } else {
           lottieEl.dataset.duration = 0;
