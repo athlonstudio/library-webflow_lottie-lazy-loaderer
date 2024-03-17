@@ -20,8 +20,9 @@ jobs:
         commit_message: "Github Action: Auto Minified JS and CSS files"
         branch: ${{ github.ref }}
     
-  clear_js_deliver:
+  purge:
     runs-on: ubuntu-latest
+    if: always()
     steps:
     - name: Purge JSdeliver
       uses: gacts/purge-jsdelivr-cache@v1
