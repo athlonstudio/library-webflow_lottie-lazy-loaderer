@@ -33,7 +33,7 @@ if (!!lazyLotties.length) {
           if (!parseFloat(lottieEl.dataset.loop)) {
             //lazyLottieObserver.unobserve(lottieEl);
           } 
-        }	else {
+        } else {
           lottieEl.dataset.duration = 0;
           lottieEl.dataset.loop = 1;
           Webflow.require('lottie').createInstance(lottieEl);
