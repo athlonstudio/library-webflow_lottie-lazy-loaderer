@@ -8,20 +8,21 @@ on:
     - main
     
 jobs:
-  build:
+  minify:
     runs-on: ubuntu-latest
-    
     steps:
     - uses: actions/checkout@v2
-    
     - name: Auto Minify
       uses: nizarmah/auto-minify@v2.1
-      
     - name: Auto committing minified files
       uses: stefanzweifel/git-auto-commit-action@v4
       with:
         commit_message: "Github Action: Auto Minified JS and CSS files"
         branch: ${{ github.ref }}
+    
+  clear_js_deliver:
+    runs-on: ubuntu-latest
+    steps:
     - name: Purge JSdeliver
       uses: gacts/purge-jsdelivr-cache@v1
       with: 
