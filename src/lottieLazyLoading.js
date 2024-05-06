@@ -4,9 +4,14 @@ const checkLoaded = (lottieEl) => lottieEl.children.length && (lottieEl.children
 if (!!lazyLotties.length) {
   lazyLotties.forEach((lazyLottie) => {
     lazyLottie.dataset.defaultSrc = lazyLottie.dataset.src;
+    lazyLottie.dataset.defaultLoop = lazyLottie.dataset.loop;
+    lazyLottie.dataset.defaultAutoplay = lazyLottie.dataset.autoplay;
+    lazyLottie.dataset.state = 'paused';
     lazyLottie.dataset.src = '';
+    lazyLottie.dataset.loop = 0;
     lazyLottie.dataset.animationType = 'lazy-lottie';
-    lazyLottie.setAttribute('looping', lazyLottie.dataset.loop);
+    lazyLottie.dataset.duration = 0.01;
+    lazyLottie.dataset.autoplay = 0;
     lazyLottie.style.overflow = 'hidden';
     
     if(lazyLottie.dataset.poster) {
@@ -19,16 +24,13 @@ if (!!lazyLotties.length) {
       }
     });
 
-    const lazyLottieLoader = new IntersectionObserver((entries) => entries.forEach(async (entry) => {
+    const lazyLottieLoader = new IntersectionObserver((entries) => entries.forEach((entry) => {
       const lottieEl = entry.target;
  
       if (entry.isIntersecting && !checkLoaded(lottieEl) && lottieEl.style.display !== 'none') {  
           lottieEl.dataset.animationType = 'lottie';
           lottieEl.dataset.src = lottieEl.dataset.defaultSrc; 
-          lottieEl.dataset.state = 'paused';
-          lottieEl.dataset.duration = 0.01
-          lottieEl.dataset.loop = lottieEl.dataset.looping;
-          await Webflow.require('lottie').createInstance(lottieEl);
+          Webflow.require('lottie').createInstance(lottieEl);
           lottieEl.querySelector('img') && lottieEl.querySelector('img').remove();
           lazyLottieLoader.unobserve(lottieEl);
         } 
@@ -39,19 +41,19 @@ if (!!lazyLotties.length) {
       
       if(checkLoaded(lottieEl) && lottieEl.style.display !== 'none') {
          if (entry.isIntersecting) {
-                console.log('playing')
+                lottieEl.dataset.loop = lottieEl.dataset.defaultLoop;
+                lottieEl.dataset.autoplay = lottieEl.dataset.defaultAutoplay;
+                lottieEl.dataset.duration = lottieEl.dataset.defaultDuration;
                 lottieEl.dataset.state = 'playing';
-                lottieEl.dataset.duration = 0;
-                lottieEl.dataset.loop = lottieEl.dataset.looping;
                 Webflow.require('lottie').createInstance(lottieEl);
 
                 if (lottieEl.dataset.playOnce === 'true') {
                   lazyLottiePlayer.unobserve(lottieEl);
                 } 
              } else {
-                console.log('paused')
                   lottieEl.dataset.duration = 0.01
                   lottieEl.dataset.loop = 0;
+                  lottieEl.dataset.state = 'paused';
                   Webflow.require('lottie').createInstance(lottieEl); 
              }
       }
