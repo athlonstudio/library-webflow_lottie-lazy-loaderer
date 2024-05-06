@@ -4,8 +4,6 @@ permissions:
   pages: write 
 on:
   push:
-    branches:
-    - main
     
 jobs:
   minify:
