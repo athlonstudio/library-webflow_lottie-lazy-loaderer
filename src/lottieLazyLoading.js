@@ -66,8 +66,9 @@ if (!!lazyLotties.length) {
 
     if(lazyLottie.dataset.willTransform) {
       lazyLottie.style.left = '0px';
+      lazyLottie.style.top = '0px';
       lazyLottie.style.position = 'fixed';
-  	}
+	}
   }
 
   lazyLotties.forEach((lazyLottie) => prepareLotties(lazyLottie));
