@@ -1,8 +1,7 @@
 const lazyLotties = [...document.querySelectorAll('[data-loading="lazy"]')];
-const checkLoaded = (lottieEl) => lottieEl.children.length && (lottieEl.children[0].tagName.toLowerCase() === 'svg' || lottieEl.children[0].tagName.toLowerCase() === 'canvas');
+const checkLoaded = (lottieEl) => !!(lottieEl.children.length && (lottieEl.children[0].tagName.toLowerCase() === 'svg' || lottieEl.children[0].tagName.toLowerCase() === 'canvas'));
   
 if (!!lazyLotties.length) {
-  
   function handlePlayLottie (entry, observer) {
     const lottieEl = entry.target;
       if (entry.isIntersecting) {
@@ -58,33 +57,29 @@ if (!!lazyLotties.length) {
     
     if(lazyLottie.dataset.poster) {
       lazyLottie.style.position !== 'absolute' && (lazyLottie.style.position = 'relative');
-      lazyLottie.appendChild(Object.assign(document.createElement('img'),{
-            src:lazyLottie.dataset.poster, 
-            loading: 'eager',
-            style:'position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);',
-          }));
-      }
+      lazyLottie.appendChild(Object.assign(document.createElement('img'), {
+		src:lazyLottie.dataset.poster, 
+		loading: 'eager',
+		style:'position:absolute;left:50%;transform:translate(-50%,-50%);',
+	  }));
+  	}
 
     if(lazyLottie.dataset.willTransform) {
       lazyLottie.style.left = '0px';
-      lazyLottie.style.top = '0px';
       lazyLottie.style.position = 'fixed';
-      }
-    
+  	}
   }
 
   lazyLotties.forEach((lazyLottie) => prepareLotties(lazyLottie));
-
     const lazyLottiePlayer = new IntersectionObserver((entries) => entries.forEach((entry) => {
-      const lottieEl = entry.target;
-      
-      if(lottieEl.style.display !== 'none') {
-         checkLoaded(lottieEl) && handlePlayLottie(entry, lazyLottiePlayer)
-      }
-    }), { root: null  });
+		const lottieEl = entry.target;
+		
+		if(lottieEl.style.display !== 'none' && checkLoaded(lottieEl)) {
+		 	handlePlayLottie(entry, lazyLottiePlayer);
+		}
+    }), { root: null, rootMargin: '0px'  });
   
     const lazyLottieLoader = new IntersectionObserver((entries) => entries.forEach((entry) => handleLottieLoad(entry, lazyLottieLoader, lazyLottiePlayer)), { root: null, rootMargin: '1250px' });
-  
   
     lazyLotties.forEach((lottieElement) => lazyLottieLoader.observe(lottieElement));
     lazyLotties.forEach((lottieElement) => lazyLottiePlayer.observe(lottieElement));
