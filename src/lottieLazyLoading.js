@@ -26,6 +26,7 @@ if (!!lazyLotties.length) {
       const lottieEl = entry.target;
  
       if (entry.isIntersecting && !checkLoaded(lottieEl) && lottieEl.style.display !== 'none') {  
+        console.log(lottieEl);
         lottieEl.dataset.animationType = 'lottie';
         lottieEl.dataset.src = lottieEl.dataset.defaultSrc; 
         Webflow.require('lottie').createInstance(lottieEl);
@@ -67,7 +68,7 @@ if (!!lazyLotties.length) {
     if(lazyLottie.dataset.willTransform) {
       lazyLottie.style.left = '0px';
       lazyLottie.style.top = '0px';
-      lazyLottie.style.position = 'fixed';
+      lazyLottie.style.position = 'absolute';
 	}
   }
 
