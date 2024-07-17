@@ -61,6 +61,7 @@ if (!!lazyLotties.length) {
       lazyLottie.appendChild(Object.assign(document.createElement('img'), {
 		src:lazyLottie.dataset.poster, 
 		loading: 'eager',
+	      	ariaHidden: 'true',
 		style:'position:absolute;left:50%;transform:translate(-50%,-50%);',
 	  }));
   	}
