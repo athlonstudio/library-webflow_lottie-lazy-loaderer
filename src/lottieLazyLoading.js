@@ -26,7 +26,6 @@ if (!!lazyLotties.length) {
       const lottieEl = entry.target;
  
       if (entry.isIntersecting && !checkLoaded(lottieEl) && lottieEl.style.display !== 'none') {  
-        console.log(lottieEl);
         lottieEl.dataset.animationType = 'lottie';
         lottieEl.dataset.src = lottieEl.dataset.defaultSrc; 
         Webflow.require('lottie').createInstance(lottieEl);
